@@ -104,7 +104,7 @@ export type ULabelSubmitHandler = (submitData: ULabelSubmitData) => void;
 /**
  * @link https://github.com/SenteraLLC/ulabel/blob/main/api_spec.md#subtasks
  */
-export type ULabelSpatialType = 'contour' | 'polygon' | 'polyline' | 'bbox' | 'tbar' | 'bbox3' | 'whole-image' | 'global' | 'point';
+export type ULabelSpatialType = 'contour' | 'polygon' | 'polyline' | 'bbox' | 'tbar' | 'bbox3' | 'whole-image' | 'global' | 'point' | 'comment' | 'delete_polygon' | 'delete_bbox';
 
 // A 2D spatial payload is a list of 2D points
 export type ULabelSpatialPayload = [number, number][];
@@ -166,6 +166,7 @@ export class ULabel {
     public set_annotations(annotations: ULabelAnnotation[], subtask: ULabelSubtask);
     public set_saved(saved: boolean);
     public redraw_all_annotations(subtask?: any, offset?: any, spatial_only?: any);
+    public redraw_annotation(annotation_id: string, subtask?: string, offset?: any): void;
     public show_annotation_mode(target_jq: JQuery<any>);
     public raise_error(message: string, level?: number);
     public rezoom(): void;
@@ -176,6 +177,9 @@ export class ULabel {
     public toggle_delete_class_id_in_toolbox(): void;
     public change_brush_size(scale_factor: number): void;
     public remove_listeners(): void;
+    public hide_global_edit_suggestion(): void;
+    public hide_edit_suggestion(): void;
+    public get_global_coords_from_annbox_point(point: Array<number>): Array<number>;
     static process_classes(ulabel_obj: any, arg1: string, subtask_obj: any);
     static build_id_dialogs(ulabel_obj: any);
         
